@@ -1,0 +1,11 @@
+Solve PicoCTF: ssh Myricht@2019shell1.picoctf.com
+
+Factory secrets:
+Glyph1: find in general skils
+Glyph2: morse in gs: .--. .. .-.. .- .-. ..--- ....- .---- ...--
+Glyph3: inspect the home page (tip on glyph1) -> move bolder web exploit to find secret pasage
+Glyph4: hint glyph2: open fish ad on bottom in npp. Find in crypto
+Glyph5: find in water forensics
+Glyph6: keep switching blue and red door in binairy exploitation
+
+Scan QR code for password pc

