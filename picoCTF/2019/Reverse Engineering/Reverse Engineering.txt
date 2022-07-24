@@ -33,3 +33,12 @@ password.charAt(28) == 'e' &&
 password.charAt(29) == 'f' &&
 password.charAt(30) == '3' &&
 password.charAt(31) == 'a';
+
+asm1:
+ebp = 0x2e0
+cmp = compare(0x2e0, 0x3fb)
+jg = jumpgreater == false => next
+compare (0x2e0, 0x280)
+jne = jump not equil == true => jump to asm1+29
+mov ebp to eax
+sub = subtract(0x2e0, 0xa) => python: hex(0x2e0 - 0xa)
