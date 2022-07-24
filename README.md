@@ -1,6 +1,4 @@
 # CTFs
-# Online Python compiler (interpreter) to run Python online.
-# Write Python 3 code in this online editor and run it.
 def egcd(a, b):
     if a == 0:
         return (b, 0, 1)
