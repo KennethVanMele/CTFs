@@ -23,5 +23,5 @@ rsa-pop-quiz:
 5) C = m^e (mod n) -> python = pow(m, e, n)
 6) no: you need p and q
 7) get-d.py
-8) q = n/p, t=(p-1)*(q-1), d = inverse(e, t), m=pow(c,d,n)
+8) decypherRSA.py
 
