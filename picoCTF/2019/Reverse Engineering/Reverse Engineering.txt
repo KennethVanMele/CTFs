@@ -45,3 +45,5 @@ sub = subtract(0x2e0, 0xa) => python: hex(0x2e0 - 0xa)
 
 asm2:
 translate to python meta code
+
+Vaultdoor4: python2 can convert to bytearray
