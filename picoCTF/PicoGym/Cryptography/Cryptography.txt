@@ -28,3 +28,7 @@ rsa-pop-quiz:
 8) decypherRSA.py
 
 waves over lambda: just google substitution cipher breaker
+
+miniRSA:
+normaly c = m ** e % N, but if e is very small c < N so the modulo cancels out so c becomes m ** e
+use gmpy2 to keep precision: 
