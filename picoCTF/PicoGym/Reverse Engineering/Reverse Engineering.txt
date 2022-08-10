@@ -49,3 +49,7 @@ translate to python meta code
 Vaultdoor4: python2 can convert to bytearray
 
 droids0: open in android studio.
+
+vaultdoor5: base64 -> url
+
+reverse_cipher: same as Investigative Reversing 0
