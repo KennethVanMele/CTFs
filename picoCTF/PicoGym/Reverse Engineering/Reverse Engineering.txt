@@ -53,3 +53,15 @@ droids0: open in android studio.
 vaultdoor5: base64 -> url
 
 reverse_cipher: same as Investigative Reversing 0
+
+droids1:
+java code is stored in .dex file but not readable by android studio
+open in jadx
+In main you find buttonClick which calls getFlag, follow it to FlagstaffHill.
+It uses R.string.password: the value here is not the passord but the resource number
+Open resources.arsc -> res -> values -> strings.xml
+Enter the password in android studio
+
+vaultdoor6:
+(passBytes[i] ^ 0x55) - myBytes[i]) != 0): x - y != 0 just means == so you can rewrite to:
+(passBytes[i] ^ 0x55) != myBytes[i])) so basically just XOR myBites with 0x55
