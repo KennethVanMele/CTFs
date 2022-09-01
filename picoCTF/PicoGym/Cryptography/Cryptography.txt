@@ -31,4 +31,8 @@ waves over lambda: just google substitution cipher breaker
 
 miniRSA:
 normaly c = m ** e % N, but if e is very small c < N so the modulo cancels out so c becomes m ** e
-use gmpy2 to keep precision: 
+use gmpy2 to keep precision
+
+b00tl3gRSA2:
+Discription gives us e>d when you google this you find Wieners attack.
+I used owiener

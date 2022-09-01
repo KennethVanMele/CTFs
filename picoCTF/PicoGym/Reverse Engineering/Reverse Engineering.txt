@@ -65,3 +65,9 @@ Enter the password in android studio
 vaultdoor6:
 (passBytes[i] ^ 0x55) - myBytes[i]) != 0): x - y != 0 just means == so you can rewrite to:
 (passBytes[i] ^ 0x55) != myBytes[i])) so basically just XOR myBites with 0x55
+
+asm4:
+to long so translate to c code.
+follow:
+https://largecats.github.io/blog/2019/09/22/run-c-from-wsl-in-vs-code/
+edit to: gcc -masm=intel -m32 solution.c -o solution
