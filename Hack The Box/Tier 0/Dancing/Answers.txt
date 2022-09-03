@@ -1,0 +1,7 @@
+Server Message Block
+445
+-L
+4
+WorkShares
+get
+smbclient \\\\10.129.171.113\\WorkShares

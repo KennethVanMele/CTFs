@@ -1,0 +1,10 @@
+File Transfer Protocol
+21
+SFTP
+ping
+nmap -sV 10.129.154.8 -> vsftpd 3.0.3
+Unix
+ftp -h
+anonymous
+230
+get

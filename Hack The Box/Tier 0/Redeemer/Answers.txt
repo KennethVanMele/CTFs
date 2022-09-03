@@ -1,0 +1,11 @@
+nmap 10.129.184.2 -p T:1000-9000 -> 6379
+redis
+In-memory Database
+redis-cli
+-h
+info
+5.0.7
+select
+4
+keys *
+get flag
