@@ -1,0 +1,14 @@
+Burp suit community
+burp suite enterprise
+mobile
+proxy
+intruder
+sessions
+misc
+hotkeys
+aye (project always overrides user)
+forward
+ctrl+f
+do intercept -> response to this request
+in target -> sitemap: /5yjR2GLcoGoij2ZK
+Low
