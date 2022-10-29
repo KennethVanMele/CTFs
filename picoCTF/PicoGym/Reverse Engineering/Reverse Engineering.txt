@@ -71,3 +71,14 @@ to long so translate to c code.
 follow:
 https://largecats.github.io/blog/2019/09/22/run-c-from-wsl-in-vs-code/
 edit to: gcc -masm=intel -m32 solution.c -o solution
+
+Need for speed:
+When we look at the main function and follow it to print_flag we see we need a key.
+The function called befor print_flag is get_key which in turn uses calculate key.
+This is just a timer that runs very slower then the one set in set_timer.
+Let's run it in gdb to skip the timer:
+gdb ./need-for-speed
+break set_timer #sets breakpoint
+r #run the program
+return #return empty (accept with y)
+step #continue
