@@ -23,4 +23,5 @@ What symbol do we use to comment out parts of the code? #
 
 To get key:
 gobuster dir --url 10.129.206.30 --wordlist ./directory-list-2.3-medium.txt -> found nothin usefull
+Go to site in kali chromium so you use the VPN connection
 Try SQLi: "'- "<- don't forget space 
