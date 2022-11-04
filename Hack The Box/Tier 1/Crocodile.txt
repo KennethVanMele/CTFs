@@ -1,0 +1,25 @@
+What nmap scanning switch employs the use of default scripts during a scan? -sC
+
+What service version is found to be running on port 21?
+nmap 10.129.116.15 -sC -> vsFTPd 3.0.3
+
+What FTP code is returned to us for the "Anonymous FTP login allowed" message? 230
+
+What command can we use to download the files we find on the FTP server?
+ftp 10.129.116.15 -> help -> get
+
+What is one of the higher-privilege sounding usernames in the list we retrieved?
+dir -> get -> allowed.userlist -> exit -> vi allowed.userlist -> admin
+
+What version of Apache HTTP Server is running on the target host?
+nmap 10.129.116.15 -sC -sV
+
+What is the name of a handy web site analysis plug-in we can install in our browser? Wappalyzer
+
+What switch can we use with gobuster to specify we are looking for specific filetypes?
+gobuster dir --help -> -x
+
+What file have we found that can provide us a foothold on the target?
+wappalizer -> php -> gobuster dir --url 10.129.116.15 --wordlist ./wordlists/directory-list-2.3-medium.txt -x php -> login.php
+
+find password in allowed.userlist.passwd on ftp
