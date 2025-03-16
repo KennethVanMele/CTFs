@@ -54,3 +54,6 @@ Use low + (high - low) // 2.
 
 Time Machine:
 In the .git folder look for the COMMIT_EDITMSG to get the flag.
+
+Super SSH:
+ssh titan.picoctf.net -p 52633 -l ctf-player
