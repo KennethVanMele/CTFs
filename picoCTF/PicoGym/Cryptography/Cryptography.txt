@@ -36,3 +36,9 @@ use gmpy2 to keep precision
 b00tl3gRSA2:
 Discription gives us e>d when you google this you find Wieners attack.
 I used owiener
+
+interencdec:
+This is base64  decoded = base64.b64decode('YidkM0JxZGtwQlRYdHFhR3g2YUhsZmF6TnFlVGwzWVROclgyMHdNakV5TnpVNGZRPT0nCg==')
+This results in base 64 again but python adds some stuff: decoded = decoded.decode('UTF-8').strip()[2:len(decoded)-2]
+base64 again which results in a caesar cypher.
+It's easier to use cyberchef to find ROT19
