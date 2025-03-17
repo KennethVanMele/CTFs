@@ -1,1 +1,89 @@
-Glory of the Garden: strings garden.jpg | grep picoSo Meta: exiftool pico_img.pngWhat Lies Within: https://stylesuxx.github.io/steganography/extensions: it's a pngshark on wire 1:1) open pcap2) ctrl+f -> pico (packet bytes & string!)3) filter on udp -> notice packages with len=14) data.len==1 -> also notice source should be 10.0.0.25) data.len==1 && ip.src==10.0.0.26) right click -> follow UDP streamunzip: unzip flag.zipwhite pages:1) it's UTF-82) vervang blokjes door . en " " door #3) beeld -> zet tekst terugloop aan4) verklein scherm tot 8 tekens -> eerste teken is nooit # -> binaere ascii -> . = 0, # = 15) python 2!: print ("0" + hex(int(p, 2))[2:-1]).decode('hex')c0rrupt:1) it's a PNG -> pngcheck mystery2) first bytes must be: 137 80 78 71 13 10 26 103) first chunk is always IHDR4) CRC of pHYs is wrong: chunk = lenght-name-data-crc -> length = 9 -> set crc to 38d82c825) chunk to large: next chuck DET = IDAT -> size set AA to 00m00nwalk:SSTV: use MMSSTV and VBCable to analyse file.Set VBCable as output in VLCSet VBCable as input in MMSSTV, also click the smiley in "sync"-tabm00nwalk2:you only need the 1ste clue.steghide extract -sf message.wav -p hidden_stegosaurusInvestigative Reversing 0:The flag is at the end of the png but some characters are mismatched because they ran through "mystery".Open in Ghidra:In main you see that it just spews some random errors like "run on server", below that you have a function "at insert" that does some calculations on string.Reverse the calculations in HxD or write a script.shark on wire 2:notice a lot of len=1 but this gives a redharing.notice len=5 with aaaaa -> all port 22: udp.port==22start and end -> order by numbersrcports are different (5xxx) -> asciiInvestigative Revesing 1:picoCTF{aaaaaaaaaaaaaaaaaaaa}replace a's with chars at bottom pngs21st char = s => picoCTF{aaaaaaaaaaaaasaa}6-9 are png1 => picoCTF{Anaaaaaaaaaaasaa}10-14 are png3 => picoCTF{An0tha_aaaaaasaa}15-26 are png1 (yes overwrite png2) => picoCTF{An0tha_1_69008b75}Investigative Reversing 2:The scripts starts at 2000th char of the bmp and takes 50 chars in chuncks of 8 bits from the flag: f[2000:2000+50*8]Grab the least significant bit: ''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])convert to decimal: int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]]), 2)convert to hex: hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]]), 2))0xd6 is not a valid ascii value (20-7e) so inverse the binairy stream: reverse it: hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])[::-1], 2))there is an -5 on each char so we need +5: ''.join([chr(y+5) for y in b''.fromhex(hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])[::-1], 2))[2:])]))reverse again: ''.join([chr(y+5) for y in b''.fromhex(hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])[::-1], 2))[2:])]))[::-1]WebNet0:Import the key into wireshark: edit -> preferences -> protocols -> TLS -> RSA key list:ip = 128.237.140.23port = 57567now you can see and follow the HTTP streamVerify:Connect to ssh as instructed.ls to find checksum.txt, decrypt.sh, files (folder)cat the checksum to get the one you needsha256sum ./files/* | grep <insert checksum from checksum.txt>.decrypt.sh ./files/<whatever file you found>Scan surprise:The zip file contains an image. Connect to the ssh to scan a QR-code.
+Glory of the Garden: strings garden.jpg | grep pico
+
+So Meta: exiftool pico_img.png
+
+What Lies Within: https://stylesuxx.github.io/steganography/
+
+extensions: it's a png
+
+shark on wire 1:
+1) open pcap
+2) ctrl+f -> pico (packet bytes & string!)
+3) filter on udp -> notice packages with len=1
+4) data.len==1 -> also notice source should be 10.0.0.2
+5) data.len==1 && ip.src==10.0.0.2
+6) right click -> follow UDP stream
+
+unzip: unzip flag.zip
+
+white pages:
+1) it's UTF-8
+2) vervang blokjes door . en " " door #
+3) beeld -> zet tekst terugloop aan
+4) verklein scherm tot 8 tekens -> eerste teken is nooit # -> binaere ascii -> . = 0, # = 1
+5) python 2!: print ("0" + hex(int(p, 2))[2:-1]).decode('hex')
+
+c0rrupt:
+1) it's a PNG -> pngcheck mystery
+2) first bytes must be: 137 80 78 71 13 10 26 10
+3) first chunk is always IHDR
+4) CRC of pHYs is wrong: chunk = lenght-name-data-crc -> length = 9 -> set crc to 38d82c82
+5) chunk to large: next chuck DET = IDAT -> size set AA to 00
+
+m00nwalk:
+SSTV: use MMSSTV and VBCable to analyse file.
+Set VBCable as output in VLC
+Set VBCable as input in MMSSTV, also click the smiley in "sync"-tab
+
+m00nwalk2:
+you only need the 1ste clue.
+steghide extract -sf message.wav -p hidden_stegosaurus
+
+Investigative Reversing 0:
+The flag is at the end of the png but some characters are mismatched because they ran through "mystery".
+Open in Ghidra:
+In main you see that it just spews some random errors like "run on server", below that you have a function "at insert" that does some calculations on string.
+Reverse the calculations in HxD or write a script.
+
+shark on wire 2:
+notice a lot of len=1 but this gives a redharing.
+notice len=5 with aaaaa -> all port 22: udp.port==22
+start and end -> order by number
+srcports are different (5xxx) -> ascii
+
+Investigative Revesing 1:
+picoCTF{aaaaaaaaaaaaaaaaaaaa}
+replace a's with chars at bottom pngs
+21st char = s => picoCTF{aaaaaaaaaaaaasaa}
+6-9 are png1 => picoCTF{Anaaaaaaaaaaasaa}
+10-14 are png3 => picoCTF{An0tha_aaaaaasaa}
+15-26 are png1 (yes overwrite png2) => picoCTF{An0tha_1_69008b75}
+
+Investigative Reversing 2:
+The scripts starts at 2000th char of the bmp and takes 50 chars in chuncks of 8 bits from the flag: f[2000:2000+50*8]
+Grab the least significant bit: ''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])
+convert to decimal: int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]]), 2)
+convert to hex: hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]]), 2))
+0xd6 is not a valid ascii value (20-7e) so inverse the binairy stream: reverse it: hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])[::-1], 2))
+there is an -5 on each char so we need +5: ''.join([chr(y+5) for y in b''.fromhex(hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])[::-1], 2))[2:])]))
+reverse again: ''.join([chr(y+5) for y in b''.fromhex(hex(int(''.join([chr(0x30+(x&1)) for x in f[2000:2000+50*8]])[::-1], 2))[2:])]))[::-1]
+
+WebNet0:
+Import the key into wireshark: edit -> preferences -> protocols -> TLS -> RSA key list:
+ip = 128.237.140.23
+port = 57567
+now you can see and follow the HTTP stream
+
+Verify:
+Connect to ssh as instructed.
+ls to find checksum.txt, decrypt.sh, files (folder)
+cat the checksum to get the one you need
+sha256sum ./files/* | grep <insert checksum from checksum.txt>
+.decrypt.sh ./files/<whatever file you found>
+
+Scan surprise:
+The zip file contains an image. Connect to the ssh to scan a QR-code.
+
+Secret of the Polyglot:
+If you open the file you see the end of the flag. It also hints at being a .PNG
+file flag2of2-final.pdf confirms this.
