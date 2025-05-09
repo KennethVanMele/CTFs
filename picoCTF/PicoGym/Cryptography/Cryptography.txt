@@ -42,3 +42,15 @@ This is base64  decoded = base64.b64decode('YidkM0JxZGtwQlRYdHFhR3g2YUhsZmF6TnFl
 This results in base 64 again but python adds some stuff: decoded = decoded.decode('UTF-8').strip()[2:len(decoded)-2]
 base64 again which results in a caesar cypher.
 It's easier to use cyberchef to find ROT19
+
+Hashcrack:
+When we run hashcat with just the hash we see MD5 as a strong candidate. As it is very common it's probably this one.
+We know we need a password because we get prompted for one so let's do: hashcat -m 0 -a 0 <our hash> </path/to/rockyou.txt>
+-m 0 for MD5
+-a 0 for a dictionary attack
+We get password123. But no flag... We get another hash. Let's replace the hash?
+Nope. Back to hashcat with just the hash to see if we can identify it.
+SHA1? -m becomes 100.
+Yes: letmein found. But we just get more hashes.
+We learned from our mistake so first identify it. SHA256 = -m 1400
+qwerty098 found.
