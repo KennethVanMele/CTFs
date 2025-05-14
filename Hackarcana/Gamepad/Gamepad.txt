@@ -1,0 +1,8 @@
+We get an .pcapng- and an .html-file.
+The HTML-file contains the "keypad" used to input the flag. It also contains some javascript data.
+The .pcapng-file is a wireshark file. It contains USB data.
+In the second package we find the device ID: DualSense wireless controller (PS5)
+After some configuration steps we get what we can asume are the input packages. Let's export those to .json so we can interact using python.
+I found the USB protocol specifications here: https://controllers.fandom.com/wiki/Sony_DualSense
+In the documentation we read that 0x01 is report bit. And it does seem that all packages start with 0x01, so we can skip it.
+The remaining length is 63 as specified in the specsheet. We are interested in the adresses for the buttons and the dpad: 7.0 - 7.6.
