@@ -5,4 +5,8 @@ In the second package we find the device ID: DualSense wireless controller (PS5)
 After some configuration steps we get what we can asume are the input packages. Let's export those to .json so we can interact using python.
 I found the USB protocol specifications here: https://controllers.fandom.com/wiki/Sony_DualSense
 In the documentation we read that 0x01 is report bit. And it does seem that all packages start with 0x01, so we can skip it.
-The remaining length is 63 as specified in the specsheet. We are interested in the adresses for the buttons and the dpad: 7.0 - 7.6.
+The remaining length is 63 as specified in the specsheet. We are interested in the adresses for the buttons and the dpad and buttons: 7.0 - 7.7.
+We look when every button is pressed by isolating the byte and shifting it for each button.
+We have a lot of duplicates because of the high poll rate, so we check if the current packet is the same as the previous one. If so ignore it.
+We can copy paste the keyboard layout in a variable and translate the dpad moves to x,y coördinates. Make sure each line is 10 characters long.
+With "assert" we check which buttons get pressed. Both cross and circle are used. Only circle seems to yield our flag so cross is possibly a red harring.

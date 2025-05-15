@@ -1,10 +1,17 @@
 import json
 
-f = json.load(open("./files/input.json"))
+input_file = json.load(open("./files/input.json"))
 packets = []
+keyboard = ("ABCDEFGHIJ"
+            "KLMNOPQRST"
+            "UVWXYZabcd"
+            "efghijklmn"
+            "opqrstuvwx"
+            "yz.,-=:;{}")
+x, y = 0, 0
 flag = ""
 
-for i in f:
+for i in input_file:
     '''
     In wireshark we see HID data that corresponds with this key in the json file
     Replace removes the :
@@ -14,16 +21,11 @@ for i in f:
     data = data[1:]
 
     packets.append(data)
+
 # We have a lot of repetition, this remembers the last move and ignores the next if it's the same
 previous = packets[0][8]
-keyboard = ("ABCDEFGHIJ"
-            "KLMNOPQRST"
-            "UVWXYZabcd"
-            "efghijklmn"
-            "opqrstuvwx"
-            "yz.,-=:;{}")
-x, y = 0, 0
-for p in packets:
+
+for packet in packets:
 
     '''
         Offsets
@@ -33,17 +35,17 @@ for p in packets:
         /* 7.6*/ uint8_t ButtonCircle : 1;
         /* 7.7*/ uint8_t ButtonTriangle : 1;
         '''
-    b = p[7]
+    byte = packet[7]
 
-    if b != previous:
-        dpad = b & 0b00001111
-        btn_sq = (b >> 4) & 1
-        btn_cr = (b >> 5) & 1
-        btn_cc = (b >> 6) & 1
-        btn_tr = (b >> 7) & 1
-        previous = b
+    if byte != previous:
+        dpad = byte & 0b00001111
+        btn_square = (byte >> 4) & 1
+        btn_cross = (byte >> 5) & 1
+        btn_circle = (byte >> 6) & 1
+        btn_triangle = (byte >> 7) & 1
+        previous = byte
 
-        #print(dpad, btn_cr, btn_cc)
+        # print(dpad, btn_cr, btn_cc)
 
         '''
             North = 0,
@@ -52,23 +54,25 @@ for p in packets:
             West = 6
             None = 8
         '''
-        if dpad == 0:
-            #print("up")
-            y = y - 1
-        elif dpad == 2:
-            #print("right")
-            x = x+ 1
-        elif dpad == 4:
-            #print("down")
-            y = y + 1
-        elif dpad == 6:
-            #print("left")
-            x = x - 1
-        elif dpad == 8:
-            #print("rest")
-            pass
 
-        if btn_cc == 1:
+        match dpad:
+            case 0:
+                y = y - 1
+            case 2:
+                x = x + 1
+            case 4:
+                y = y + 1
+            case 6:
+                x = x - 1
+            case 8:
+                pass
+
+        assert btn_square == 0
+        # assert btn_cross == 0
+        assert btn_triangle == 0
+        # assert btn_circle == 0
+
+        if btn_circle == 1:
             flag += keyboard[x+y*10]
 
 print(flag)
