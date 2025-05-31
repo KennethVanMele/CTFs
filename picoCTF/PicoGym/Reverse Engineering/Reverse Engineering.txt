@@ -82,3 +82,17 @@ break set_timer #sets breakpoint
 r #run the program
 return #return empty (accept with y)
 step #continue
+
+Flag Hunters:
+We get the source code. When we print out song_lines, we can see that object 0 contains our flag.
+The script starts at [VERSE1] which is object 1 however...
+Luckely we get a chanse to sing along:
+      elif re.match(r"CROWD.*", line):
+        crowd = input('Crowd: ')
+        song_lines[lip] = 'Crowd: ' + crowd
+        lip += 1
+This code isn't sanitized, so let's try pass ";RETURN 0"
+; is the delimiter and RETURN gives us a specific verse because of:
+      elif re.match(r"RETURN [0-9]+", line):
+        lip = int(line.split()[1])	
+Important! No space between ";" and "RETURN"!

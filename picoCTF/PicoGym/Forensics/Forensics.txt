@@ -87,3 +87,7 @@ The zip file contains an image. Connect to the ssh to scan a QR-code.
 Secret of the Polyglot:
 If you open the file you see the end of the flag. It also hints at being a .PNG
 file flag2of2-final.pdf confirms this.
+
+DISKO1:
+We get a disk dump file.
+With strings disko-1.dd | grep pico we get the flag.
