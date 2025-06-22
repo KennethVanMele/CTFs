@@ -54,3 +54,6 @@ SHA1? -m becomes 100.
 Yes: letmein found. But we just get more hashes.
 We learned from our mistake so first identify it. SHA256 = -m 1400
 qwerty098 found.
+
+Even RSA can be broken:
+The K to get P and Q is rather small. Also N always seeems to be even. Is one of them 2? Let's try it. (see scripts)
