@@ -57,3 +57,19 @@ In the .git folder look for the COMMIT_EDITMSG to get the flag.
 
 Super SSH:
 ssh titan.picoctf.net -p 52633 -l ctf-player
+
+Rust Fix Me 1:
+Let's try and build the project with cargo build.
+First of all we seem to be missing a ";" on line 5, let's add that.
+Next to print a variable we use "{}". So this line becomes: println!("Decrypted flag: {}",String::from_utf8_lossy(&decrypted_buffer));
+Lastly "ret" should be "return"
+Now it builds. Let's run it with cargo run.
+
+Rust Fix Me 2:
+Try cargo build again.
+It tells us to make borrowed_string mutable by adding "mut". Same for party_foul in the last 2 lines.
+You can now build and run.
+
+Rust fix me3:
+You know the drill.
+This might be the easiest one, because they give you the sollution: just uncomment the "unsafe{}"-block.
