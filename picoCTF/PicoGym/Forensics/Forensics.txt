@@ -91,3 +91,8 @@ file flag2of2-final.pdf confirms this.
 DISKO1:
 We get a disk dump file.
 With strings disko-1.dd | grep pico we get the flag.
+
+RED:
+Exiftool reveals a poem. But it's not very helpfull. So let's see if we can find some more in a text editor.
+Nothing readable, but some weird pattern. Let's check with zsteg.
+Bingo: base64
