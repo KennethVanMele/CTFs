@@ -96,3 +96,12 @@ RED:
 Exiftool reveals a poem. But it's not very helpfull. So let's see if we can find some more in a text editor.
 Nothing readable, but some weird pattern. Let's check with zsteg.
 Bingo: base64
+
+Ph4nt0m 1ntrud3r:
+When I open the file in wireshark I notice some base64 strings.
+I can capture those with tshark: "tshark -r myNetworkTraffic.pcap -Y "tcp"" gives me the same as wireshark. Now I want to select the segment data by adding "-T fields -e tcp.segment_data".
+This gives byte codes. Lets convert them to hex with "xxd -p -r" and then to ascii with base64 -d
+That looks like gibberish. It looks like to much data. Maybe just the longer ones? "tshark -r myNetworkTraffic.pcap -Y "tcp.len==12" -T fields -e tcp.segment_data | xxd -p -r | base64 -d"
+That's better but out of order? Oh, it's not sorted by time. Let's fix that: add the "-e frame.time"-data field. And pipe it to sort. Now select the data with "awk {print $6}"
+Hmm still something seems missing... OMG there is 1 packet of 4 so "tcp.len==12" => "tcp.len==12 || tcp.len==4". Ok it looks like only the } was missing but still, better safe then sorry.
+Final command: tshark -r myNetworkTraffic.pcap -Y "tcp.len==12 || tcp.len==4" -T fields -e frame.time -e tcp.segment_data | sort | awk '{print $6}' | xxd -p -r | base64 -d
