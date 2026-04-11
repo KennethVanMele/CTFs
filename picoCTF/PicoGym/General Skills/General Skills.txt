@@ -73,3 +73,10 @@ You can now build and run.
 Rust fix me3:
 You know the drill.
 This might be the easiest one, because they give you the sollution: just uncomment the "unsafe{}"-block.
+
+Undo:
+base64 -d
+rev
+tr '-' '_'
+tr ['(',')'] ['{','}']
+tr 'A-Za-z' 'N-ZA-Mn-za-m'
