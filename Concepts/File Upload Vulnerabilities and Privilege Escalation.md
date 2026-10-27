@@ -18,7 +18,7 @@ Once arbitrary PHP can run, a minimal script that passes one URL query parameter
 
 ## Why privilege escalation is usually the next step, not an afterthought
 
-Landing a shell as a low-privileged service account is rarely the end goal  -  the interesting data (other users' files, root-only secrets) is usually inaccessible to that account by design. Checking `sudo -l` (what commands, if any, this account can run as another user, especially root, without a password) is a standard, low-cost first privilege-escalation check: a misconfiguration that allows passwordless `sudo` on *any* command (even something as innocuous-seeming as `ls`) hands over full root-equivalent file read access immediately, since `sudo <any command>` runs with root's permissions.
+Landing a shell as a low-privileged service account is rarely the end goal - the interesting data (other users' files, root-only secrets) is usually inaccessible to that account by design. Checking `sudo -l` (what commands, if any, this account can run as another user, especially root, without a password) is a standard, low-cost first privilege-escalation check: a misconfiguration that allows passwordless `sudo` on *any* command (even something as innocuous-seeming as `ls`) hands over full root-equivalent file read access immediately, since `sudo <any command>` runs with root's permissions.
 
 ## The underlying lesson
 

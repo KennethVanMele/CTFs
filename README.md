@@ -8,7 +8,7 @@ A collection of CTF challenges I've completed, mostly picoCTF, with notes on bot
 
 ## Structure
 
-- **`Concepts/`**, the "why" layer. Each file explains one underlying security/CS concept (buffer overflows, SQL injection, steganography, RSA attacks, etc.) in depth, independent of any specific challenge. Every challenge note links back to the relevant concept page(s) with `[[Double Bracket Links]]`.
+- **`Concepts/`**, the "why" layer. Each file explains one underlying security/CS concept (buffer overflows, SQL injection, steganography, RSA attacks, etc.) in depth, independent of any specific challenge. Every challenge note links back to the relevant concept page(s) with double-bracket wikilinks.
 - **`picoCTF/PicoGym/<Category>/`**, challenge notes grouped by category (Binary Exploitation, Cryptography, Forensics, General Skills, Reverse Engineering, Web exploitation). Within a category, notes combine challenges that share the same underlying technique into one file (e.g. all the LSB-steganography challenges live together), rather than one file per challenge, so related solutions and their shared "why" sit next to each other.
 - **`Hackarcana/`**, write-ups from Hackarcana challenges.
 - **`Archive/`**, old TryHackMe and Hack The Box notes. Kept for reference but not actively maintained, lighter on explanation than the picoCTF/Concepts material.
