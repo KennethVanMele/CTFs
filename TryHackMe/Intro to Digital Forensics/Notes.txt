@@ -1,2 +1,0 @@
-Run pdfinfo on ransom-letter.pdf
-Run exiftools on letter-image.jpg
