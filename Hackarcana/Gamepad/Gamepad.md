@@ -3,9 +3,6 @@ tags: [hackarcana, forensics, usb, packet-capture]
 platform: Hackarcana
 status: active
 ---
-
-# Gamepad
-
 ## Steps
 
 Given a `.pcapng` file and an `.html` file.
@@ -21,5 +18,4 @@ Given a `.pcapng` file and an `.html` file.
 9. With `assert`, check which buttons get pressed. Both Cross and Circle are used in the capture, but only Circle's presses actually yield the flag, Cross turns out to be a red herring.
 
 ## Why
-
-This is [[Packet Capture Analysis]] applied to USB traffic instead of IP traffic: Wireshark captures USB the same way it captures network packets, and the device's own public protocol specification tells you exactly which byte offsets and bits correspond to real-world events (a button press, a D-pad direction), the same principle as reading a known network protocol's header fields. The deduplication step (skipping repeated identical packets) is necessary because of the controller's high poll rate, without it, the same button press would be recorded dozens of times in a row. The deliberate red herring (Cross presses that don't correspond to the real input) is a reminder to verify a hypothesis against the actual expected output rather than assuming every observed signal is meaningful.
+This is [[Packet Capture Analysis]] applied to USB traffic instead of IP traffic. Wireshark captures USB the same way it captures network packets. The device's own public protocol specification tells you exactly which byte offsets and bits correspond to real-world events (a button press, a D-pad direction), the same principle as reading a known network protocol's header fields. The deduplication step (skipping repeated identical packets) is necessary because of the controller's high poll rate, without it, the same button press would be recorded dozens of times in a row. The deliberate red herring (Cross presses that don't correspond to the real input) is a reminder to verify a hypothesis against the actual expected output rather than assuming every observed signal is meaningful.
