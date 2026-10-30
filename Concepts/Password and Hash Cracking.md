@@ -1,5 +1,8 @@
 ---
-tags: [concept, crypto, passwords]
+tags:
+  - concept
+  - crypto
+  - passwords
 ---
 ## What a Hash Is, and Why It Can Be "Cracked" at All
 A cryptographic hash function (MD5, SHA-1, SHA-256, NTLM, bcrypt, …) is a one-way function: it's computationally infeasible to reverse the hash to recover the original input directly. "Cracking" a hash doesn't reverse the math - it **guesses** candidate inputs, hashes each one with the same algorithm, and compares the result to the target hash. If a guess produces a matching hash, that guess *is* the original input (or at least a collision, which is rare for a well-chosen hash and a specific target).
