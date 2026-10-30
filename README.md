@@ -28,6 +28,7 @@ Every note carries YAML frontmatter with `tags`. Conventions:
 - [[RSA and Public-Key Cryptography Attacks]]
 - [[Encoding vs Encryption]]
 - [[Password and Hash Cracking]]
+- [[ZIP Encryption and CRC-32 Leakage]]
 - [[Steganography]]
 - [[File Metadata Analysis]]
 - [[PNG File Format Internals]]
